@@ -1,6 +1,6 @@
 import React from "react";
 import '../assets/style.css'
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from 'react';
 import { register } from '../api';
 
@@ -9,12 +9,15 @@ function Register() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [password_confirmation, setPasswordConfirmation] = useState('');
+  const navigate = useNavigate()
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const response = await register(name, email, password, password_confirmation);
       console.log(response.data);
+      localStorage.setItem('token', response.data.token);
+      navigate('/home')
     } catch (error) {
       console.error(error);
     }
@@ -58,7 +61,7 @@ function Register() {
             <button type="submit" className="btn btn-primary">Register</button>
           </div>
 
-          <Link to='/' href="">Login</Link>
+          <Link to='/login' href="">Login</Link>
         </form>
       </div>
     </div>

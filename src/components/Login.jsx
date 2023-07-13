@@ -1,10 +1,11 @@
 import React from "react";
 import '../assets/style.css'
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from 'react';
 import { login } from '../api';
 
 function Login() {
+  const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -13,7 +14,10 @@ function Login() {
     try {
       const response = await login(email, password);
       console.log(response.data);
+      localStorage.setItem('token', response.data.token);
+      navigate('/home')
     } catch (error) {
+      alert('service error');
       console.error(error);
     }
   };
@@ -40,7 +44,7 @@ function Login() {
             <button type="submit" className="btn btn-primary">Login</button>
           </div>
 
-          <Link to='/register' href="">Register</Link>
+          <Link to='/register'>Register</Link>
         </form>
       </div>
     </div>
