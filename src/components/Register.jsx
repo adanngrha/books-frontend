@@ -24,7 +24,7 @@ function Register() {
   };
 
   return (
-    <div className="register template d-flex justify-content-center align-items-center vh-100 bg-primary">
+    <div className="register template d-flex justify-content-center align-items-center vh-100 bg-dark">
       <div className="form-container p-5 rounded bg-white">
         <form onSubmit={handleSubmit}>
           <h3 className="text-center">Register</h3>
